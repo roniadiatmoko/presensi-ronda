@@ -113,6 +113,7 @@
                     <thead>
                         <tr>
                             <th>Nomor Rumah</th>
+                            <th>Nama</th>
                             <th>Kehadiran</th>
                             <th>Waktu Absen</th>
                         </tr>
@@ -159,7 +160,7 @@
             }
         }
 
-        const urlScript = 'https://script.google.com/macros/s/AKfycbyRGETPT2yUuDwjl2pHevGr089UdP7VH7qnPz9UCLv3PCeRA4MI2ERPtGBIo4D3csaEMg/exec';
+        const urlScript = 'https://script.google.com/macros/s/AKfycbxEYcjh2yQzVITyYh5ut7VR0aWoJKYalhlBmBUsA4LNo2FHTYrnFi5-m4tpE3ro2COOmA/exec';
 
         function kirimPesan(){
             // Replace these values with your own
@@ -242,6 +243,7 @@
 
                     tr.innerHTML = `
                         <td>${row.nomor_rumah}</td>
+                        <td>${row.pemilik}</td>
                         <td>${row.kehadiran}</td>
                         <td>${formattedDate}</td>
                     `;
@@ -267,8 +269,8 @@
                 }
             });
 
-            const isValid = await checkDuplicateBeforeSubmit(); // ✅ Cek duplikasi dulu
-            if (!isValid) return; // ❌ Stop jika duplikat
+            let canSubmit = await checkDuplicateBeforeSubmit();
+            if (!canSubmit) return; // Jika duplikat, hentikan proses
 
             if(document.getElementById("nomor_rumah").value == ''){
                 alert('Nomor Rumah harus diisi!');
@@ -324,13 +326,12 @@
         }
 
         async function checkDuplicateBeforeSubmit() {
-            const urlGetData = urlScript; // Ganti dengan URL Apps Script doGet()
             const tanggalInput = document.getElementById("tanggal").value;
             const nomorRumahInput = document.getElementById("nomor_rumah").value;
 
             try {
                 // 🔹 Ambil data presensi hari ini dari Google Sheets
-                const response = await fetch(urlGetData);
+                const response = await fetch(urlScript);
                 const data = await response.json();
 
                 console.log("Data dari Google Sheets:", data); // Debugging
