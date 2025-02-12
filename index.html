@@ -50,9 +50,17 @@
         document.getElementById('tanggal').valueAsDate = new Date();
 
         function loadPresensiHariIni() {
-            fetch("https://script.google.com/macros/s/AKfycbyeaZUyg0QcfHxSI-pv3CgqInFKjLFd0m3WHAev62QsfsN3FEa5QqwmXRzse_7gWe7lAA/exec")
+            fetch("https://script.google.com/macros/s/AKfycbzJoPmg982BoNZxn3ptvgqhqJ7zbT7IP87o0X7f1-Jg7ql5N-tnfS6hGAStn-FWSnA/exec")
             .then(response => response.json()) // ✅ Ambil JSON response langsung
             .then(data => {
+                console.log("Data diterima dari API:", data); // ✅ Debug response di Console
+
+                if (!Array.isArray(data)) {
+                    console.error("Response bukan array!", data);
+                    document.getElementById("presensi-hari-ini").innerHTML = "<tr><td colspan='5'>Error: Data tidak valid.</td></tr>";
+                    return;
+                }
+
                 let tableBody = document.getElementById("presensi-hari-ini");
                 tableBody.innerHTML = ""; // Kosongkan tabel sebelum mengisi ulang
 
@@ -83,8 +91,9 @@
         document.addEventListener("DOMContentLoaded", loadPresensiHariIni);
 
 
+
         function kirimPresensi() {
-            fetch("https://script.google.com/macros/s/AKfycbyeaZUyg0QcfHxSI-pv3CgqInFKjLFd0m3WHAev62QsfsN3FEa5QqwmXRzse_7gWe7lAA/exec", {
+            fetch("https://script.google.com/macros/s/AKfycbzJoPmg982BoNZxn3ptvgqhqJ7zbT7IP87o0X7f1-Jg7ql5N-tnfS6hGAStn-FWSnA/exec", {
                 method: "POST",
                 mode: "no-cors", // Hindari preflight request
                 headers: {
