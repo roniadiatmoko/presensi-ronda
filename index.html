@@ -30,6 +30,7 @@
     </form>
 
     <script>
+        document.getElementById('tanggal').valueAsDate = new Date();
         $("#presensiForm").submit(function(event) {
             event.preventDefault();
 
@@ -39,24 +40,27 @@
                 kehadiran: $("#kehadiran").val()
             };
 
-            $.ajax({
-                url: "https://script.google.com/macros/s/AKfycbyl7gDXJzBS9fcE4_88DtYMhuNEwUoSez5UHDbYKBAR_EFRrn6wMRxck6W9jSEdgNwNwQ/exec", // Ganti dengan URL Google Apps Script
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    tanggal: $("#tanggal").val(),
-                    nomor_rumah: $("#nomor_rumah").val(),
-                    kehadiran: $("#kehadiran").val()
-                }),
-                success: function(response) {
-                    console.log("Response dari server:", response);
-                    alert("Presensi berhasil dikirim!");
+            fetch("https://script.google.com/macros/s/AKfycbyxvVAOSapXLoX60O78bdbck1gMJKca08v3Msug8B2Y-OjUdTTJ8geIuIOJQtn08GI0yA/exec", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
                 },
-                error: function(xhr, status, error) {
-                    console.error("Gagal mengirim presensi!", xhr.responseText);
-                    alert("Gagal mengirim presensi! Cek console untuk detail.");
-                }
+                body: JSON.stringify({
+                    tanggal: document.getElementById("tanggal").value,
+                    nomor_rumah: document.getElementById("nomor_rumah").value,
+                    kehadiran: document.getElementById("kehadiran").value
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Response dari server:", data);
+                alert("Presensi berhasil dikirim!");
+            })
+            .catch(error => {
+                console.error("Gagal mengirim presensi!", error);
+                alert("Gagal mengirim presensi! Cek console untuk detail.");
             });
+
         });
     </script>
 </body>
