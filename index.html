@@ -50,10 +50,8 @@
         document.getElementById('tanggal').valueAsDate = new Date();
 
         function loadPresensiHariIni() {
-            fetch("https://script.google.com/macros/s/AKfycbwNWMvYrn9Y0Q4lkdlxEIC8UoIuSWxoBLbUxCQW9eDjHYI3iE4v77fs13s368015bC3CA/exec", {
-                    mode: "no-cors", // Hindari preflight request
-                })
-                .then(response => response.json())
+            fetch("https://script.google.com/macros/s/AKfycby9jt4Off9F8MBCi4a6npeb0Zp2_zkqjsVxmNYk9wi5_9r3IWUj5MICA9xnkgdS_BFDGQ/exec")
+                .then(response => response.json()) // ✅ Tidak perlu mode: "no-cors"
                 .then(data => {
                     let tableBody = document.getElementById("presensi-hari-ini");
                     tableBody.innerHTML = ""; // Kosongkan tabel sebelum mengisi ulang
@@ -85,7 +83,7 @@
         document.addEventListener("DOMContentLoaded", loadPresensiHariIni);
 
         function kirimPresensi() {
-            fetch("https://script.google.com/macros/s/AKfycbwNWMvYrn9Y0Q4lkdlxEIC8UoIuSWxoBLbUxCQW9eDjHYI3iE4v77fs13s368015bC3CA/exec", {
+            fetch("https://script.google.com/macros/s/AKfycby9jt4Off9F8MBCi4a6npeb0Zp2_zkqjsVxmNYk9wi5_9r3IWUj5MICA9xnkgdS_BFDGQ/exec", {
                 method: "POST",
                 mode: "no-cors", // Hindari preflight request
                 headers: {
