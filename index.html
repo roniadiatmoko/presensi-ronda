@@ -41,10 +41,9 @@
             };
 
             $.ajax({
-                url: "http://cors.io/?https://script.google.com/macros/s/AKfycbyxvVAOSapXLoX60O78bdbck1gMJKca08v3Msug8B2Y-OjUdTTJ8geIuIOJQtn08GI0yA/exec", // Ganti dengan URL Google Apps Script terbaru
+                url: "https://script.google.com/macros/s/AKfycbzOSQSu9w73hfjzOBCRTzFUKYbO_2baXjBtWR55Srdb09-5v1eBZifNxAkSe7_pPhKurQ/exec", // Ganti dengan URL Web App terbaru
                 type: "POST",
-                dataType: "json",
-                crossDomain: true,
+                contentType: "application/json",
                 data: JSON.stringify({
                     tanggal: $("#tanggal").val(),
                     nomor_rumah: $("#nomor_rumah").val(),
@@ -59,6 +58,7 @@
                     alert("Gagal mengirim presensi! Cek console untuk detail.");
                 }
             });
+
 
         });
     </script>
