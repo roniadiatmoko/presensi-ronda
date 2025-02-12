@@ -40,16 +40,21 @@
             };
 
             $.ajax({
-                url: "https://script.google.com/macros/s/AKfycbxKRh7ShkewNYGBsl1vIs2LBuB4BzG9gLutbWKfIIm8_Hr1nE-qc-1emcmxZmfCTKTmAw/exec", // Ganti dengan URL Google Apps Script
+                url: "https://script.google.com/macros/s/AKfycbyqfyxT2cGJ_CLD6j80ZsBKRAgdMZEg39q_ib0Gley5CvgMCvN9tR5Bo5v7CX8kcI0itw/exec", // Ganti dengan URL Google Apps Script
                 type: "POST",
                 contentType: "application/json",
-                data: JSON.stringify(formData),
+                data: JSON.stringify({
+                    tanggal: $("#tanggal").val(),
+                    nomor_rumah: $("#nomor_rumah").val(),
+                    kehadiran: $("#kehadiran").val()
+                }),
                 success: function(response) {
+                    console.log("Response dari server:", response);
                     alert("Presensi berhasil dikirim!");
-                    $("#presensiForm")[0].reset();
                 },
-                error: function(err) {
-                    alert("Gagal mengirim presensi!");
+                error: function(xhr, status, error) {
+                    console.error("Gagal mengirim presensi!", xhr.responseText);
+                    alert("Gagal mengirim presensi! Cek console untuk detail.");
                 }
             });
         });
