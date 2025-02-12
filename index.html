@@ -50,10 +50,10 @@
         document.getElementById('tanggal').valueAsDate = new Date();
 
         function loadPresensiHariIni() {
-            fetch("https://script.google.com/macros/s/AKfycbzJoPmg982BoNZxn3ptvgqhqJ7zbT7IP87o0X7f1-Jg7ql5N-tnfS6hGAStn-FWSnA/exec")
-            .then(response => response.json()) // ✅ Ambil JSON response langsung
+            fetch("https://script.google.com/macros/s/AKfycbyUOMOEN1xq0IGkN6FCpHToy66MuNd4-Gnk-_hHCaH8rrKWYKXIeuLHb_gQnbLvT5AuGA/exec")
+            .then(response => response.json())
             .then(data => {
-                console.log("Data diterima dari API:", data); // ✅ Debug response di Console
+                console.log("Data diterima:", data);
 
                 if (!Array.isArray(data)) {
                     console.error("Response bukan array!", data);
@@ -62,7 +62,7 @@
                 }
 
                 let tableBody = document.getElementById("presensi-hari-ini");
-                tableBody.innerHTML = ""; // Kosongkan tabel sebelum mengisi ulang
+                tableBody.innerHTML = "";
 
                 if (data.length === 0) {
                     tableBody.innerHTML = "<tr><td colspan='5'>Belum ada presensi hari ini.</td></tr>";
@@ -93,7 +93,7 @@
 
 
         function kirimPresensi() {
-            fetch("https://script.google.com/macros/s/AKfycbzJoPmg982BoNZxn3ptvgqhqJ7zbT7IP87o0X7f1-Jg7ql5N-tnfS6hGAStn-FWSnA/exec", {
+            fetch("https://script.google.com/macros/s/AKfycbyUOMOEN1xq0IGkN6FCpHToy66MuNd4-Gnk-_hHCaH8rrKWYKXIeuLHb_gQnbLvT5AuGA/exec", {
                 method: "POST",
                 mode: "no-cors", // Hindari preflight request
                 headers: {
@@ -132,36 +132,6 @@
             });
         }
 
-        // $("#presensiForm").submit(function(event) {
-        //     event.preventDefault();
-
-        //     var formData = {
-        //         tanggal: $("#tanggal").val(),
-        //         nomor_rumah: $("#nomor_rumah").val(),
-        //         kehadiran: $("#kehadiran").val()
-        //     };
-
-        //     fetch("https://script.google.com/macros/s/AKfycbwwnutPZW0sUDY2_ZJ4UTl_oL0d8ybcVTzodMQjDEvMtZLtcL7mTH2ILjNOjCN3FWx61g/exec", {
-        //         method: "POST",
-        //         mode: "no-cors", // Menghindari preflight request
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         },
-        //         body: JSON.stringify({
-        //             tanggal: document.getElementById("tanggal").value,
-        //             nomor_rumah: document.getElementById("nomor_rumah").value,
-        //             kehadiran: document.getElementById("kehadiran").value
-        //         })
-        //     })
-        //     .then(response => console.log("Data terkirim:", response))
-        //     .catch(error => {
-        //         console.error("Gagal mengirim presensi!", error);
-        //         alert("Gagal mengirim presensi! Cek console untuk detail.");
-        //     });
-
-
-
-        // });
     </script>
 </body>
 </html>
