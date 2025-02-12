@@ -40,8 +40,9 @@
                 kehadiran: $("#kehadiran").val()
             };
 
-            fetch("https://script.google.com/macros/s/AKfycbwa-D8ZWs0dUOThFvs1FzYFD8eA67fpk_ftny6obxUcPPW8kGa7vR53rT2JOePURFD63w/exec", {
+            fetch("https://script.google.com/macros/s/AKfycbwwnutPZW0sUDY2_ZJ4UTl_oL0d8ybcVTzodMQjDEvMtZLtcL7mTH2ILjNOjCN3FWx61g/exec", {
                 method: "POST",
+                mode: "no-cors", // Menghindari preflight request
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -51,15 +52,12 @@
                     kehadiran: document.getElementById("kehadiran").value
                 })
             })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Response dari server:", data);
-                alert("Presensi berhasil dikirim!");
-            })
+            .then(response => console.log("Data terkirim:", response))
             .catch(error => {
                 console.error("Gagal mengirim presensi!", error);
                 alert("Gagal mengirim presensi! Cek console untuk detail.");
             });
+
 
 
         });
