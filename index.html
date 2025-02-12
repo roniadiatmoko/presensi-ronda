@@ -40,25 +40,24 @@
                 kehadiran: $("#kehadiran").val()
             };
 
-            fetch("https://script.google.com/macros/s/AKfycbyxvVAOSapXLoX60O78bdbck1gMJKca08v3Msug8B2Y-OjUdTTJ8geIuIOJQtn08GI0yA/exec", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
+            $.ajax({
+                url: "http://cors.io/?https://script.google.com/macros/s/AKfycbyxvVAOSapXLoX60O78bdbck1gMJKca08v3Msug8B2Y-OjUdTTJ8geIuIOJQtn08GI0yA/exec", // Ganti dengan URL Google Apps Script terbaru
+                type: "POST",
+                dataType: "json",
+                crossDomain: true,
+                data: JSON.stringify({
+                    tanggal: $("#tanggal").val(),
+                    nomor_rumah: $("#nomor_rumah").val(),
+                    kehadiran: $("#kehadiran").val()
+                }),
+                success: function(response) {
+                    console.log("Response dari server:", response);
+                    alert("Presensi berhasil dikirim!");
                 },
-                body: JSON.stringify({
-                    tanggal: document.getElementById("tanggal").value,
-                    nomor_rumah: document.getElementById("nomor_rumah").value,
-                    kehadiran: document.getElementById("kehadiran").value
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Response dari server:", data);
-                alert("Presensi berhasil dikirim!");
-            })
-            .catch(error => {
-                console.error("Gagal mengirim presensi!", error);
-                alert("Gagal mengirim presensi! Cek console untuk detail.");
+                error: function(xhr, status, error) {
+                    console.error("Gagal mengirim presensi!", xhr.responseText);
+                    alert("Gagal mengirim presensi! Cek console untuk detail.");
+                }
             });
 
         });
