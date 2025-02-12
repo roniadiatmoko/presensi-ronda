@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="container mt-4">
-    <h2 class="text-center">Presensi Ronda GBK Tempel-2</h2>
+    <h2 class="text-center">Presensi Ronda GBK Tempel 2</h2>
 
     <form id="presensiForm" class="p-4 border rounded">
         <div class="mb-3">
@@ -50,36 +50,28 @@
         document.getElementById('tanggal').valueAsDate = new Date();
 
         function loadPresensiHariIni() {
-            fetch("https://script.google.com/macros/s/AKfycbwKXrM15LGDHBBf_BIjZ_702eSU4b9RSqUGyCv4zxxVZu7_JRHLB2fb_O6rs4H-U_wTkQ/exec", {
-                method: "GET"
-            })
-            .then(response => response.text()) // 🔥 Ubah dari .json() ke .text()
-            .then(text => {
-                try {
-                    let data = JSON.parse(text); // 🔥 Parse manual karena HTML response
-                    let tableBody = document.getElementById("presensi-hari-ini");
-                    tableBody.innerHTML = ""; // Kosongkan tabel sebelum mengisi ulang
+            fetch("https://script.google.com/macros/s/AKfycbyeaZUyg0QcfHxSI-pv3CgqInFKjLFd0m3WHAev62QsfsN3FEa5QqwmXRzse_7gWe7lAA/exec")
+            .then(response => response.json()) // ✅ Ambil JSON response langsung
+            .then(data => {
+                let tableBody = document.getElementById("presensi-hari-ini");
+                tableBody.innerHTML = ""; // Kosongkan tabel sebelum mengisi ulang
 
-                    if (data.length === 0) {
-                        tableBody.innerHTML = "<tr><td colspan='5'>Belum ada presensi hari ini.</td></tr>";
-                        return;
-                    }
-
-                    data.forEach(row => {
-                        let tr = document.createElement("tr");
-                        tr.innerHTML = `
-                            <td>${row.id}</td>
-                            <td>${row.tanggal}</td>
-                            <td>${row.nomor_rumah}</td>
-                            <td>${row.kehadiran}</td>
-                            <td>${row.tanggal_input}</td>
-                        `;
-                        tableBody.appendChild(tr);
-                    });
-                } catch (error) {
-                    console.error("Gagal parsing data!", error);
-                    document.getElementById("presensi-hari-ini").innerHTML = "<tr><td colspan='5'>Gagal memuat data.</td></tr>";
+                if (data.length === 0) {
+                    tableBody.innerHTML = "<tr><td colspan='5'>Belum ada presensi hari ini.</td></tr>";
+                    return;
                 }
+
+                data.forEach(row => {
+                    let tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${row.id}</td>
+                        <td>${row.tanggal}</td>
+                        <td>${row.nomor_rumah}</td>
+                        <td>${row.kehadiran}</td>
+                        <td>${row.tanggal_input}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
             })
             .catch(error => {
                 console.error("Gagal mengambil data!", error);
@@ -90,8 +82,9 @@
         // Panggil fungsi saat halaman dimuat
         document.addEventListener("DOMContentLoaded", loadPresensiHariIni);
 
+
         function kirimPresensi() {
-            fetch("https://script.google.com/macros/s/AKfycbwKXrM15LGDHBBf_BIjZ_702eSU4b9RSqUGyCv4zxxVZu7_JRHLB2fb_O6rs4H-U_wTkQ/exec", {
+            fetch("https://script.google.com/macros/s/AKfycbyeaZUyg0QcfHxSI-pv3CgqInFKjLFd0m3WHAev62QsfsN3FEa5QqwmXRzse_7gWe7lAA/exec", {
                 method: "POST",
                 mode: "no-cors", // Hindari preflight request
                 headers: {
