@@ -50,7 +50,9 @@
         document.getElementById('tanggal').valueAsDate = new Date();
 
         function loadPresensiHariIni() {
-            fetch("https://script.google.com/macros/s/AKfycbwNWMvYrn9Y0Q4lkdlxEIC8UoIuSWxoBLbUxCQW9eDjHYI3iE4v77fs13s368015bC3CA/exec")
+            fetch("https://script.google.com/macros/s/AKfycbwNWMvYrn9Y0Q4lkdlxEIC8UoIuSWxoBLbUxCQW9eDjHYI3iE4v77fs13s368015bC3CA/exec", {
+                    mode: "no-cors", // Hindari preflight request
+                })
                 .then(response => response.json())
                 .then(data => {
                     let tableBody = document.getElementById("presensi-hari-ini");
