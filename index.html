@@ -160,7 +160,7 @@
             }
         }
 
-        const urlScript = 'https://script.google.com/macros/s/AKfycbxEYcjh2yQzVITyYh5ut7VR0aWoJKYalhlBmBUsA4LNo2FHTYrnFi5-m4tpE3ro2COOmA/exec';
+        const urlScript = 'https://script.google.com/macros/s/AKfycbxOfa3d3NL5O-IjiQAJ3g5pQt3TX0wPWd6jUg8sIRIpW4tsz5qbrFZ8xrcdr54EghlwnQ/exec';
 
         function kirimPesan(){
             // Replace these values with your own
@@ -307,8 +307,9 @@
 
                 // Kosongkan form
                 // document.getElementById("tanggal").value = "";
-                document.getElementById("nomor_rumah").value = "";
+                // document.getElementById("nomor_rumah").value = "";
                 // document.getElementById("kehadiran").value = "";
+                $('#nomor_rumah').val('').change()
 
                 // 🔥 Perbarui tabel setelah submit
                 loadPresensiHariIni();
