@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presensi Ronda</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery & Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet">
@@ -12,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="container mt-4">
-    <h2 class="text-center">Presensi Ronda GBK Tempel 2</h2>
+    <h2 class="text-center"><b>Presensi Ronda GBK Tempel 2</b></h2>
     <div class="row">
         <!-- <button onclick="kirimPesan()">Kirim Pesan</button> -->
         <form id="presensiForm" class="p-4 border rounded">
@@ -102,7 +103,6 @@
                 <select class="form-select" id="kehadiran">
                     <option value="H">Hadir</option>
                     <option value="I">Ijin</option>
-                    <option value="A">Tidak Hadir</option>
                 </select>
             </div>
             <button type="button" class="btn btn-lg btn-info w-100" onclick="kirimPresensi()">Simpan Presensi</button>
@@ -161,25 +161,6 @@
         }
 
         const urlScript = 'https://script.google.com/macros/s/AKfycbz4trjDWkq9ajSVTeMaq1xLC3lHx1WVNZYjIgbxEk9uO1k4QgDgqYlQqx7IXWgYi5aBVA/exec';
-
-        function kirimPesan(){
-            // Replace these values with your own
-            const phoneNumber = '6285162866857';  // Your WhatsApp phone number, including country code, but without the plus symbol.
-            const groupId = '120363383629831896';          // The WhatsApp Group ID you want to send the message to.
-            const message = 'Hello, this is a test message!';  // Your message
-            const apiKey = '4924083';            // Your CallMeBot API key
-
-            // Construct the API URL
-            const apiUrl = `https://api.callmebot.com/whatsapp.php?phone=${phoneNumber}&text=${encodeURIComponent(message)}&group_id=${groupId}&apikey=${apiKey}`;
-
-            // Send the request using Fetch API
-            fetch(apiUrl, {mode: "no-cors"})
-            .then(response => response.json())  // Parse the response as JSON
-            .then(data => console.log('Message sent successfully:', data))  // Handle the success
-            .catch(error => console.error('Error sending message:', error));  // Handle errors
-
-        }
-
 
         const date = new Date();
         // document.getElementById('tanggal').valueAsDate = date;
@@ -273,12 +254,22 @@
             if (!canSubmit) return; // Jika duplikat, hentikan proses
 
             if(document.getElementById("nomor_rumah").value == ''){
-                alert('Nomor Rumah harus diisi!');
+                Swal.fire({
+                    title: "Kurang tepat!",
+                    text: "Nomor rumah harus diisi",
+                    icon: "error",
+                    confirmButtonText: "Coba Lagi"
+                });
                 return;
             }
 
             if(document.getElementById("nomor_rumah").value > 68 || document.getElementById("nomor_rumah").value < 1){
-                alert('Nomor Rumah harus 1-68 !');
+                Swal.fire({
+                    title: "Kurang tepat!",
+                    text: "Nomor Rumah harus 1-68",
+                    icon: "error",
+                    confirmButtonText: "Coba Lagi"
+                });
                 return;
             }
 
