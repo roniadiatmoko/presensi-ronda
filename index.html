@@ -13,10 +13,11 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="container mt-4">
-    <div class="text-center" style="margin: 5px; padding: 5px; border-radius: 10px; background-color: #E8F5E9;">
-        <img src="assets/img/logo.png" style="width: 30%;" />
-        <h4 class="text-success"><b>Presensi Ronda GBK Tempel 2</b></h4>
+    <div class="d-flex align-items-center justify-content-center" style="margin: 5px; padding: 5px; border-radius: 10px; background-color: #E8F5E9;">
+        <img src="assets/img/logo.png" style="height: auto; max-height: 100px; margin-right: 10px;" />
+        <h4 class="text-success" style="line-height: 40px; margin-bottom: 0;"><b>Presensi Ronda</b></h4>
     </div>
+
     <div class="row" style="border-radius: 10px; background-color: #E0F2F1; margin: 5px; padding: 5px;">
         <form id="presensiForm" class="p-4">
             <div class="col-md-12 mb-3">
@@ -61,7 +62,7 @@
                     <option value="31">31 - Amri</option>
                     <option value="32">32 - Dedy</option>
                     <option value="33">33 - Roni</option>
-                    <option value="34">34 - (belum diisi nama)</option>
+                    <option value="34">34 - Joko</option>
                     <option value="35">35 - Sinyo/Aang</option>
                     <option value="36">36 - (belum diisi nama)</option>
                     <option value="37">37 - Ulil</option>
@@ -134,7 +135,7 @@
             allowClear: true
         });
 
-        waktuBolehPresensi()
+        // waktuBolehPresensi()
         function waktuBolehPresensi(){
             // ✅ 1. Cek Jam Saat Ini
             let now = new Date();
@@ -161,7 +162,7 @@
             }
         }
 
-        const urlScript = 'https://script.google.com/macros/s/AKfycbz4trjDWkq9ajSVTeMaq1xLC3lHx1WVNZYjIgbxEk9uO1k4QgDgqYlQqx7IXWgYi5aBVA/exec';
+        const urlScript = 'https://script.google.com/macros/s/AKfycbwHUBUiZTG1wKJWtlErIdafxZlZZKrGgmFbVu8JRhgLLU68jhXzDAmxJq3A3VZhiFojAg/exec';
 
         const date = new Date();
         // document.getElementById('tanggal').valueAsDate = date;
